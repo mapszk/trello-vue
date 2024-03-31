@@ -67,8 +67,9 @@ const cards = [
       <span class="text-sm">Nombre de la columna</span>
       <button>...</button>
     </div>
-    <div class="cards flex h-full overflow-y-auto p-1 flex-col gap-2 mt-4">
+    <div class="cards flex h-full overflow-y-auto p-1 flex-col gap-2 my-3">
       <Card v-for="card of cards" :key="card.id" :title="card.title" :tags="card.tags" />
     </div>
+    <div>Añadir tarjeta</div>
   </div>
 </template>

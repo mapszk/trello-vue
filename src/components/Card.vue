@@ -1,5 +1,7 @@
 <script setup>
+import { DialogContent, DialogOverlay, DialogPortal, DialogRoot, DialogTrigger } from 'radix-vue'
 import Tag from './Tag.vue'
+import CardModal from './CardModal.vue'
 
 const props = defineProps({
   title: String,
@@ -9,16 +11,28 @@ const props = defineProps({
 </script>
 
 <template>
-  <div
-    class="bg-white shadow-sm cursor-pointer rounded-xl hover:outline outline-2 outline-green-600"
-  >
-    <header class="h-10 rounded-t-xl bg-green-400"></header>
-    <div class="p-2">
-      <div class="flex gap-1 mb-1">
-        <Tag v-for="tag of tags" :key="tag.id" :tag="tag.tag" :id="tag.id" :color="tag.color" />
+  <DialogRoot>
+    <DialogTrigger>
+      <div
+        class="bg-white shadow-sm cursor-pointer text-left rounded-xl hover:outline outline-2 outline-green-600"
+      >
+        <header class="h-10 rounded-t-xl bg-green-400"></header>
+        <div class="p-2">
+          <div class="flex gap-1 mb-1">
+            <Tag v-for="tag of tags" :key="tag.id" :tag="tag.tag" :id="tag.id" :color="tag.color" />
+          </div>
+          <h4 class="mb-2">{{ props.title }}</h4>
+          <div class="w-6 h-6 ml-auto bg-slate-400 rounded-full"></div>
+        </div>
       </div>
-      <h4 class="mb-2">{{ props.title }}</h4>
-      <div class="w-6 h-6 ml-auto bg-slate-400 rounded-full"></div>
-    </div>
-  </div>
+    </DialogTrigger>
+    <DialogPortal>
+      <DialogOverlay class="bg-gray-950 opacity-60 fixed inset-0 z-30" />
+      <DialogContent
+        class="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] focus:outline-none z-[100]"
+      >
+        <CardModal />
+      </DialogContent>
+    </DialogPortal>
+  </DialogRoot>
 </template>
