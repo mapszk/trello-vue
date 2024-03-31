@@ -4,7 +4,13 @@ import Column from '../components/Column.vue'
 
 <template>
   <main class="h-[calc(100vh - 3rem)]">
-    <section class="h-full flex flex-row gap-4 p-4">
+    <section class="bg-gray-50 h-full w-screen overflow-x-auto flex gap-4 p-4">
+      <Column />
+      <Column />
+      <Column />
+      <Column />
+      <Column />
+      <Column />
       <Column />
       <Column />
       <Column />

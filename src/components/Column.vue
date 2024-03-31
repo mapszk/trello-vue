@@ -62,7 +62,7 @@ const cards = [
 </script>
 
 <template>
-  <div class="w-72 h-full flex flex-col p-3 rounded-xl shadow-sm bg-gray-200">
+  <div class="w-72 h-full shrink-0 flex flex-col p-3 rounded-xl shadow-sm bg-gray-200">
     <div class="flex items-center justify-between">
       <span class="text-sm">Nombre de la columna</span>
       <button>...</button>
@@ -72,29 +72,3 @@ const cards = [
     </div>
   </div>
 </template>
-
-<style scoped>
-/* width */
-::-webkit-scrollbar {
-  width: 8px;
-  margin-left: 25px;
-  padding-left: 25px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 4px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #bbbbbb;
-  border-radius: 4px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #acacac;
-}
-</style>

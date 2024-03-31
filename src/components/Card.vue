@@ -10,10 +10,10 @@ const props = defineProps({
 
 <template>
   <div
-    class="flex flex-col h-auto bg-white shadow-sm cursor-pointer rounded-xl hover:outline outline-2 outline-green-600"
+    class="bg-white shadow-sm cursor-pointer rounded-xl hover:outline outline-2 outline-green-600"
   >
-    <header class="min-h-10 bg-green-400"></header>
-    <div class="p-3">
+    <header class="h-10 rounded-t-xl bg-green-400"></header>
+    <div class="p-2">
       <div class="flex gap-1 mb-1">
         <Tag v-for="tag of tags" :key="tag.id" :tag="tag.tag" :id="tag.id" :color="tag.color" />
       </div>
