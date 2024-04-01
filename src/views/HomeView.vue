@@ -1,5 +1,6 @@
 <script setup>
 import Column from '../components/Column.vue'
+import NewColumn from '../components/NewColumn.vue'
 
 const cards0 = []
 const cards1 = [
@@ -82,10 +83,11 @@ const cards2 = [
 
 <template>
   <main class="h-[calc(100vh - 3rem)]">
-    <section class="bg-gray-50 h-full w-screen overflow-x-auto flex gap-4 p-4">
+    <section class="bg-gray-50 h-full w-screen overflow-x-auto flex items-start gap-3 p-4">
       <Column name="In progress" :cards="cards2" />
       <Column name="In revision" :cards="cards1" />
       <Column name="Deployed" :cards="cards0" />
+      <NewColumn />
     </section>
   </main>
 </template>
