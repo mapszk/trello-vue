@@ -1,4 +1,5 @@
 <script setup>
+import CardModal from '@/components/Card/CardModal.vue'
 import Column from '../components/Column/Column.vue'
 import NewColumn from '../components/Column/NewColumn.vue'
 
@@ -95,6 +96,7 @@ const cards2 = [
       <Column name="Deployed" :cards="cards0" />
       <NewColumn />
     </section>
+    <CardModal />
   </main>
 </template>
 
