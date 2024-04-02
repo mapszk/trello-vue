@@ -77,10 +77,16 @@ const toggleNewCard = async () => {
     </div>
     <div
       ref="cardsContainer"
-      v-if="props.cards.length"
+      v-if="props.cards.length || showNewCard"
       class="cards flex overflow-y-auto p-1 flex-col gap-2 mt-2"
     >
-      <Card v-for="card of props.cards" :key="card.id" :title="card.title" :tags="card.tags" />
+      <Card
+        v-for="card of props.cards"
+        :key="card.id"
+        :title="card.title"
+        :color="card.color"
+        :tags="card.tags"
+      />
       <AddCard v-if="showNewCard" @close="toggleNewCard" />
     </div>
     <div v-if="!showNewCard" class="shrink-0 mt-1 p-1">

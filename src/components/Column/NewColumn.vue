@@ -33,11 +33,8 @@ const togglePlaceholder = async () => {
       v-model="newColumnName"
       class="h-8 mb-2 text-sm px-2 w-full rounded-md outline-blue-500"
     />
-    <div class="flex">
-      <Button>
-        <Icon icon="radix-icons:plus-circled" class="mr-2" width="16px" />
-        Add column
-      </Button>
+    <div class="flex gap-1">
+      <Button primary> Add column </Button>
       <Button @click="togglePlaceholder" class="p-0">
         <Icon icon="radix-icons:cross-2" width="18px" />
       </Button>

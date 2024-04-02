@@ -20,11 +20,8 @@ onMounted(() => newCardInput.value.focus())
       v-model="newCardName"
       class="h-24 mb-2 resize-none border border-gray-300 text-sm p-2 min-h-12 w-full rounded-xl focus:outline-none"
     ></textarea>
-    <div class="flex">
-      <Button>
-        <Icon icon="radix-icons:plus-circled" class="mr-2" width="16px" />
-        Add card
-      </Button>
+    <div class="flex gap-1">
+      <Button primary> Add card </Button>
       <Button @click="close" class="p-0">
         <Icon icon="radix-icons:cross-2" width="18px" />
       </Button>

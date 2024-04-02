@@ -7,6 +7,7 @@ const cards1 = [
   {
     id: 1,
     title: '[FRONT] Asignar usuarios trial a escuelas recién creadas',
+    color: 'green',
     tags: [
       { tag: 'Frontend', id: 1, color: '#8c9e2d' },
       { tag: 'Trello', id: 2, color: '#d82f89' }
@@ -25,6 +26,7 @@ const cards2 = [
   {
     id: 1,
     title: '[FRONT] Asignar usuarios trial a escuelas recién creadas',
+    color: 'green',
     tags: [
       { tag: 'Frontend', id: 1, color: '#8c9e2d' },
       { tag: 'Trello', id: 2, color: '#d82f89' }
@@ -33,6 +35,7 @@ const cards2 = [
   {
     id: 2,
     title: '[FRONT] Revisar errores del Google Search Console de la landing',
+    color: 'green',
     tags: [
       { tag: 'Frontend', id: 1, color: '#8c9e2d' },
       { tag: 'Trello', id: 2, color: '#d82f89' }
@@ -49,6 +52,7 @@ const cards2 = [
   {
     id: 4,
     title: '[FRONT] Asignar usuarios trial a escuelas recién creadas',
+    color: 'green',
     tags: [
       { tag: 'Frontend', id: 1, color: '#8c9e2d' },
       { tag: 'Trello', id: 2, color: '#d82f89' }
@@ -65,6 +69,7 @@ const cards2 = [
   {
     id: 6,
     title: '[FRONT] Asignar usuarios trial a escuelas recién creadas',
+    color: 'green',
     tags: [
       { tag: 'Frontend', id: 1, color: '#8c9e2d' },
       { tag: 'Trello', id: 2, color: '#d82f89' }
@@ -73,6 +78,7 @@ const cards2 = [
   {
     id: 7,
     title: '[FRONT] Asignar usuarios trial a escuelas recién creadas',
+    color: 'green',
     tags: [
       { tag: 'Frontend', id: 1, color: '#8c9e2d' },
       { tag: 'Trello', id: 2, color: '#d82f89' }
