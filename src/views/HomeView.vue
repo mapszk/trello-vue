@@ -1,5 +1,5 @@
 <script setup>
-import CardModal from '@/components/Card/CardModal.vue'
+import CardModal from '@/components/Card/Modal/CardModal.vue'
 import Column from '../components/Column/Column.vue'
 import NewColumn from '../components/Column/NewColumn.vue'
 import { useColumnsStore } from '@/stores/columns'

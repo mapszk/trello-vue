@@ -1,21 +1,19 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { defaultEmptyCard } from '@/constants/cards'
 
 export const useCardsStore = defineStore('cards', () => {
   const cards = ref([])
 
   const addNewCard = (newCard) => {
     const id = Date.now()
-    cards.value.push(
-      defaultEmptyCard({
-        id,
-        title: newCard.title,
-        columnId: newCard.columnId,
-        color: newCard.color,
-        order: newCard.order
-      })
-    )
+    cards.value.push({
+      id,
+      title: newCard.title,
+      columnId: newCard.columnId,
+      description: newCard.description || null,
+      color: newCard.color || null,
+      order: newCard.order
+    })
     return id
   }
   const deleteCard = (cardId) => {

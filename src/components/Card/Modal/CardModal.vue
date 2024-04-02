@@ -1,14 +1,15 @@
 <script setup>
-import Tag from '../Tag.vue'
-import Modal from '../Modal.vue'
+import Modal from '@/components/Modal.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCardsStore } from '@/stores/cards'
 import { useColumnsStore } from '@/stores/columns'
 import { computed } from 'vue'
-import Color from './CardSettings/Color.vue'
-import Move from './CardSettings/Move.vue'
-import Copy from './CardSettings/Copy.vue'
-import Delete from './CardSettings/Delete.vue'
+import Color from '../CardSettings/Color.vue'
+import Move from '../CardSettings/Move.vue'
+import Copy from '../CardSettings/Copy.vue'
+import Delete from '../CardSettings/Delete.vue'
+import Title from './Title.vue'
+import Description from './Description.vue'
 
 const emit = defineEmits(['close'])
 const router = useRouter()
@@ -37,7 +38,7 @@ const tags = []
 
 <template>
   <Modal @close="closeModal">
-    <div class="max-w-[800px] min-h-[550px] mt-4 mb-4 md:mt-12 md:mb-12 rounded-xl bg-white">
+    <div class="md:min-w-[800px] max-w-[800px] mt-4 mb-4 md:mt-12 md:mb-12 rounded-xl bg-white">
       <header
         v-if="cardInfo.color"
         class="w-full h-24 md:h-32 rounded-t-xl flex p-2 md:p-4"
@@ -50,14 +51,12 @@ const tags = []
           <Icon icon="radix-icons:cross-2" class="text-gray-800" width="22px" />
         </button>
       </header>
-      <div class="flex flex-col md:flex-row">
+      <div class="flex flex-col md:flex-row min-h-[400px]">
         <section class="flex-[3_3_0%] p-6 w-full">
           <div class="flex items-start">
             <Icon class="mr-4 mt-1" icon="radix-icons:card-stack" width="22px" />
             <div class="w-full">
-              <h4 class="text-xl font-semibold mb-1">
-                {{ cardInfo.title }}
-              </h4>
+              <Title :cardId="cardInfo.id" :title="cardInfo.title" />
               <span class="text-sm text-gray-500">en la lista: {{ columnName }}</span>
               <div class="flex mt-4 gap-1">
                 <div class="w-8 h-8 mr-2 rounded-full bg-slate-500"></div>
@@ -69,10 +68,7 @@ const tags = []
             <Icon class="mr-4 mt-1" icon="radix-icons:text-align-left" width="23px" />
             <div class="w-full">
               <h4 class="text-xl font-semibold mb-1">Description</h4>
-              <p class="text-md">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, consectetur dolor
-                aspernatur illum quasi est illo quas inventore magnam architecto, delectus similique
-              </p>
+              <Description class="mt-2" :cardId="cardInfo.id" :description="cardInfo.description" />
             </div>
           </div>
         </section>
