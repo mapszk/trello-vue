@@ -1,6 +1,5 @@
 <script setup>
-import Button from './Button.vue'
-import { Icon } from '@iconify/vue'
+import Button from '../Button.vue'
 import { nextTick, ref } from 'vue'
 
 const newColumnName = ref('')

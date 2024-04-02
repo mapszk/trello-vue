@@ -1,6 +1,6 @@
 <script setup>
-import Column from '../components/Column.vue'
-import NewColumn from '../components/NewColumn.vue'
+import Column from '../components/Column/Column.vue'
+import NewColumn from '../components/Column/NewColumn.vue'
 
 const cards0 = []
 const cards1 = [

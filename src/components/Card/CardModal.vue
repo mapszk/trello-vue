@@ -1,7 +1,6 @@
 <script setup>
 import { DialogClose } from 'radix-vue'
-import { Icon } from '@iconify/vue'
-import Tag from './Tag.vue'
+import Tag from '../Tag.vue'
 
 const tags = [
   { tag: 'Frontend', id: 1, color: '#8c9e2d' },

@@ -1,6 +1,6 @@
 <script setup>
 import { DialogContent, DialogOverlay, DialogPortal, DialogRoot, DialogTrigger } from 'radix-vue'
-import Tag from './Tag.vue'
+import Tag from '../Tag.vue'
 import CardModal from './CardModal.vue'
 
 const props = defineProps({
@@ -21,7 +21,9 @@ const props = defineProps({
           <div class="flex gap-1 mb-1">
             <Tag v-for="tag of tags" :key="tag.id" :tag="tag.tag" :id="tag.id" :color="tag.color" />
           </div>
-          <h4 class="mb-2">{{ props.title }}</h4>
+          <h4 class="mb-2 line-clamp-3 text-ellipsis overflow-hidden">
+            {{ props.title }}
+          </h4>
           <div class="w-6 h-6 ml-auto bg-slate-400 rounded-full"></div>
         </div>
       </div>

@@ -1,8 +1,9 @@
 <script setup>
-import { Icon } from '@iconify/vue'
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'radix-vue'
-import Card from './Card.vue'
+import Card from '../Card/Card.vue'
+import AddCard from './AddCard.vue'
 import { nextTick, ref } from 'vue'
+import Button from '../Button.vue'
 
 const props = defineProps({
   name: String,
@@ -10,12 +11,22 @@ const props = defineProps({
 })
 
 const isEdition = ref(false)
+const showNewCard = ref(false)
 const columnInput = ref(null)
+const cardsContainer = ref(null)
 const columnName = ref(props.name)
 
 const toggleEdition = () => {
   isEdition.value = !isEdition.value
   if (isEdition.value) nextTick(() => columnInput.value.focus())
+}
+
+const toggleNewCard = async () => {
+  showNewCard.value = !showNewCard.value
+  if (cardsContainer.value) {
+    await nextTick()
+    cardsContainer.value.scrollTop = cardsContainer.value.scrollHeight
+  }
 }
 </script>
 
@@ -64,16 +75,22 @@ const toggleEdition = () => {
         </PopoverPortal>
       </PopoverRoot>
     </div>
-    <div v-if="props.cards.length" class="cards flex overflow-y-auto p-1 flex-col gap-2 mt-2">
+    <div
+      ref="cardsContainer"
+      v-if="props.cards.length"
+      class="cards flex overflow-y-auto p-1 flex-col gap-2 mt-2"
+    >
       <Card v-for="card of props.cards" :key="card.id" :title="card.title" :tags="card.tags" />
+      <AddCard v-if="showNewCard" @close="toggleNewCard" />
     </div>
-    <div class="shrink-0 mt-2">
-      <button
+    <div v-if="!showNewCard" class="shrink-0 mt-1 p-1">
+      <Button
+        @click="toggleNewCard"
         class="flex items-center rounded-md hover:bg-gray-300 p-2 text-gray-600 text-sm font-semibold"
       >
         <Icon icon="radix-icons:plus-circled" class="mr-2" width="16px" />
-        Add card
-      </button>
+        Add a new card
+      </Button>
     </div>
   </div>
 </template>
