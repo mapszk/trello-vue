@@ -31,6 +31,7 @@ const toggleOpen = () => {
     </PopoverTrigger>
     <PopoverPortal>
       <PopoverContent
+        @pointerDownOutside="toggleOpen"
         side="bottom"
         :align="'end'"
         class="rounded-xl mt-1 p-2 border border-gray-300 shadow-md bg-white"
