@@ -4,8 +4,10 @@ import Card from '../Card/Card.vue'
 import AddCard from './AddCard.vue'
 import { nextTick, ref } from 'vue'
 import Button from '../Button.vue'
+import { useColumnsStore } from '@/stores/columns'
 
 const props = defineProps({
+  id: Number,
   name: String,
   cards: Array
 })
@@ -15,10 +17,12 @@ const showNewCard = ref(false)
 const columnInput = ref(null)
 const cardsContainer = ref(null)
 const columnName = ref(props.name)
+const { deleteColumn, editColumn } = useColumnsStore()
 
 const toggleEdition = () => {
   isEdition.value = !isEdition.value
   if (isEdition.value) nextTick(() => columnInput.value.focus())
+  columnName.value && editColumn(props.id, { name: columnName.value })
 }
 
 const toggleNewCard = async () => {
@@ -27,6 +31,11 @@ const toggleNewCard = async () => {
     await nextTick()
     cardsContainer.value.scrollTop = cardsContainer.value.scrollHeight
   }
+}
+
+const editCol = () => {
+  columnName.value && editColumn(props.id, { name: columnName.value })
+  isEdition.value = false
 }
 </script>
 
@@ -45,7 +54,8 @@ const toggleNewCard = async () => {
       <input
         v-show="isEdition"
         ref="columnInput"
-        @blur="toggleEdition"
+        @keypress.enter="editCol"
+        @blur="editCol"
         type="text"
         v-model="columnName"
         class="h-full text-sm px-2 w-full rounded-md outline-blue-500"
@@ -65,6 +75,7 @@ const toggleNewCard = async () => {
             <ul>
               <li>
                 <button
+                  @click="() => deleteColumn(props.id)"
                   class="rounded-md w-full text-left px-2 py-1 font-semibold text-gray-600 hover:bg-gray-300"
                 >
                   Delete

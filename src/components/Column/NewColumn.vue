@@ -1,14 +1,21 @@
 <script setup>
+import { useColumnsStore } from '@/stores/columns'
 import Button from '../Button.vue'
 import { nextTick, ref } from 'vue'
 
 const newColumnName = ref('')
 const newColumnInput = ref(null)
 const showPlaceholder = ref(true)
+const { addNewColumn } = useColumnsStore()
 
 const togglePlaceholder = async () => {
   showPlaceholder.value = !showPlaceholder.value
   if (!showPlaceholder.value) nextTick(() => newColumnInput.value.focus())
+}
+
+const submit = () => {
+  newColumnName.value && addNewColumn({ name: newColumnName.value })
+  newColumnName.value = ''
 }
 </script>
 
@@ -19,7 +26,7 @@ const togglePlaceholder = async () => {
     class="w-72 shrink-0 rounded-xl flex items-center p-3 font-semibold text-sm text-gray-700 bg-gray-200 hover:bg-gray-300"
   >
     <Icon class="mr-2" icon="radix-icons:plus" width="18px" />
-    Add another column
+    Add a new column
   </button>
   <div
     v-else
@@ -31,10 +38,11 @@ const togglePlaceholder = async () => {
       type="text"
       placeholder="Type your new list name..."
       v-model="newColumnName"
+      @keypress.enter="submit"
       class="h-8 mb-2 text-sm px-2 w-full rounded-md outline-blue-500"
     />
     <div class="flex gap-1">
-      <Button primary> Add column </Button>
+      <Button primary @click="submit"> Add column </Button>
       <Button @click="togglePlaceholder" class="p-0">
         <Icon icon="radix-icons:cross-2" width="18px" />
       </Button>

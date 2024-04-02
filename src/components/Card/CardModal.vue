@@ -50,11 +50,6 @@ const tags = [
               <p class="text-md">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, consectetur dolor
                 aspernatur illum quasi est illo quas inventore magnam architecto, delectus similique
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, consectetur dolor
-                aspernatur illum quasi est illo quas inventore magnam architecto, delectus similique
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, consectetur dolor
-                aspernatur illum quasi est illo quas inventore magnam architecto, delectus similique
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, consectetur dolo
               </p>
             </div>
           </div>
