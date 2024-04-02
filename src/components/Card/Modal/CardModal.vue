@@ -10,6 +10,7 @@ import Copy from '../CardSettings/Copy.vue'
 import Delete from '../CardSettings/Delete.vue'
 import Title from './Title.vue'
 import Description from './Description.vue'
+import Avatar from '@/components/Avatar.vue'
 
 const emit = defineEmits(['close'])
 const router = useRouter()
@@ -59,7 +60,7 @@ const tags = []
               <Title :cardId="cardInfo.id" :title="cardInfo.title" />
               <span class="text-sm text-gray-500">en la lista: {{ columnName }}</span>
               <div class="flex mt-4 gap-1">
-                <div class="w-8 h-8 mr-2 rounded-full bg-slate-500"></div>
+                <Avatar class="w-9 h-9 mr-auto text-gray-400" />
                 <Tag v-for="tag of tags" big :tag="tag.tag" :key="tag.id" :color="tag.color" />
               </div>
             </div>

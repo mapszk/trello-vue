@@ -1,5 +1,6 @@
 <script setup>
 import Tag from '../Tag.vue'
+import Avatar from '@/components/Avatar.vue'
 
 const props = defineProps({
   id: Number,
@@ -25,7 +26,7 @@ const props = defineProps({
       <h4 class="mb-2 line-clamp-3 text-ellipsis overflow-hidden">
         {{ props.title }}
       </h4>
-      <div class="w-6 h-6 ml-auto bg-slate-400 rounded-full"></div>
+      <Avatar class="w-7 h-7 ml-auto text-gray-400" />
     </div>
   </RouterLink>
 </template>
