@@ -6,14 +6,17 @@ export const useCardsStore = defineStore('cards', () => {
   const cards = ref([])
 
   const addNewCard = (newCard) => {
+    const id = Date.now()
     cards.value.push(
       defaultEmptyCard({
-        id: Date.now(),
+        id,
         title: newCard.title,
         columnId: newCard.columnId,
+        color: newCard.color,
         order: newCard.order
       })
     )
+    return id
   }
   const deleteCard = (cardId) => {
     cards.value = cards.value.filter((card) => card.id !== cardId)

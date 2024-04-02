@@ -3,14 +3,25 @@ import CardModal from '@/components/Card/CardModal.vue'
 import Column from '../components/Column/Column.vue'
 import NewColumn from '../components/Column/NewColumn.vue'
 import { useColumnsStore } from '@/stores/columns'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import { useCardsStore } from '@/stores/cards'
+import router from '@/router'
 
 const route = useRoute()
-const showCardModal = computed(() => route.name === 'card')
-const store = useColumnsStore()
-const { columns } = storeToRefs(store)
+const columnsStore = useColumnsStore()
+const cardsStore = useCardsStore()
+const { columns } = storeToRefs(columnsStore)
+
+const cardExists = computed(() =>
+  cardsStore.cards.find((card) => card.id === Number(route.params.id))
+)
+const showCardModal = computed(() => route.name === 'card' && cardExists.value)
+
+onMounted(() => {
+  if (!cardExists.value && route.name === 'card') router.push({ name: 'home' })
+})
 </script>
 
 <template>

@@ -1,8 +1,6 @@
 <script setup>
-import { useRouter } from 'vue-router'
 import Tag from '../Tag.vue'
 
-const router = useRouter()
 const props = defineProps({
   id: Number,
   title: String,
@@ -10,13 +8,11 @@ const props = defineProps({
   tags: Array,
   user: Object
 })
-
-const showCardModal = () => router.push({ name: 'card', params: { id: props.id } })
 </script>
 
 <template>
-  <div
-    @click="showCardModal"
+  <RouterLink
+    :to="{ name: 'card', params: { id: props.id } }"
     class="bg-white shadow-sm cursor-pointer text-left rounded-xl hover:outline outline-2 outline-blue-500"
   >
     <header v-if="color" class="h-10 rounded-t-xl" :style="{ backgroundColor: color }"></header>
@@ -31,5 +27,5 @@ const showCardModal = () => router.push({ name: 'card', params: { id: props.id }
       </h4>
       <div class="w-6 h-6 ml-auto bg-slate-400 rounded-full"></div>
     </div>
-  </div>
+  </RouterLink>
 </template>

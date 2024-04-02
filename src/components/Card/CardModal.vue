@@ -1,11 +1,14 @@
 <script setup>
 import Tag from '../Tag.vue'
-import CardSidebar from './CardSidebar.vue'
 import Modal from '../Modal.vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCardsStore } from '@/stores/cards'
 import { useColumnsStore } from '@/stores/columns'
 import { computed } from 'vue'
+import Color from './CardSettings/Color.vue'
+import Move from './CardSettings/Move.vue'
+import Copy from './CardSettings/Copy.vue'
+import Delete from './CardSettings/Delete.vue'
 
 const emit = defineEmits(['close'])
 const router = useRouter()
@@ -22,13 +25,14 @@ const columnName = computed(
 
 const closeModal = () => {
   emit('close')
-  router.go(-1)
+  router.push({ name: 'home' })
+}
+const copied = (id) => {
+  closeModal()
+  router.push({ name: 'card', params: { id } })
 }
 
-const tags = [
-  { tag: 'Frontend', id: 1, color: '#8c9e2d' },
-  { tag: 'Trello', id: 2, color: '#d82f89' }
-]
+const tags = []
 </script>
 
 <template>
@@ -73,10 +77,21 @@ const tags = [
           </div>
         </section>
         <div class="flex-1 p-6 flex flex-col">
-          <button @click="closeModal" class="ml-auto rounded-md hover:bg-[rgba(0,0,0,0.15)] p-1">
+          <button
+            v-if="!cardInfo.color"
+            @click="closeModal"
+            class="ml-auto rounded-md hover:bg-[rgba(0,0,0,0.15)] p-1"
+          >
             <Icon icon="radix-icons:cross-2" class="text-gray-800" width="22px" />
           </button>
-          <CardSidebar :cardId="cardInfo.id" />
+          <aside class="flex flex-col gap-2">
+            <span class="text-xs font-semibold text-gray-600">Settings</span>
+            <Color :cardId="cardInfo.id" />
+            <span class="text-xs font-semibold text-gray-600 mt-4">Actions</span>
+            <Move :cardId="cardInfo.id" :columnId="cardInfo.columnId" />
+            <Copy :card="cardInfo" @copy="copied" />
+            <Delete :cardId="cardInfo.id" />
+          </aside>
         </div>
       </div>
     </div>
