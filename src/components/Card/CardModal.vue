@@ -2,9 +2,14 @@
 import Tag from '../Tag.vue'
 import CardSidebar from './CardSidebar.vue'
 import Modal from '../Modal.vue'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const emit = defineEmits(['close'])
-const closeModal = () => emit('close')
+const closeModal = () => {
+  emit('close')
+  router.go(-1)
+}
 
 const tags = [
   { tag: 'Frontend', id: 1, color: '#8c9e2d' },
@@ -14,13 +19,16 @@ const tags = [
 
 <template>
   <Modal @close="closeModal">
-    <div class="w-[800px] h-[500px] rounded-xl bg-white">
-      <header class="bg-green-400 w-full h-32 rounded-t-xl flex p-4">
-        <button class="mb-auto ml-auto rounded-md hover:bg-[rgba(0,0,0,0.15)] p-1">
+    <div class="max-w-[800px] min-h-[550px] mt-4 mb-4 md:mt-12 md:mb-12 rounded-xl bg-white">
+      <header class="bg-green-400 w-full h-24 md:h-32 rounded-t-xl flex p-2 md:p-4">
+        <button
+          @click="closeModal"
+          class="mb-auto ml-auto rounded-md hover:bg-[rgba(0,0,0,0.15)] p-1"
+        >
           <Icon icon="radix-icons:cross-2" class="text-gray-800" width="22px" />
         </button>
       </header>
-      <div class="flex">
+      <div class="flex flex-col md:flex-row">
         <section class="flex-[3_3_0%] p-6 w-full">
           <div class="flex items-start">
             <Icon class="mr-4 mt-1" icon="radix-icons:card-stack" width="22px" />
@@ -42,7 +50,11 @@ const tags = [
               <p class="text-md">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, consectetur dolor
                 aspernatur illum quasi est illo quas inventore magnam architecto, delectus similique
-                beatae blanditiis, nobis in pariatur commodi fugiat dolores!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, consectetur dolor
+                aspernatur illum quasi est illo quas inventore magnam architecto, delectus similique
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, consectetur dolor
+                aspernatur illum quasi est illo quas inventore magnam architecto, delectus similique
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, consectetur dolo
               </p>
             </div>
           </div>
