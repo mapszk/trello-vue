@@ -20,7 +20,7 @@ import { cardColors } from '../../constants/cards'
         <PopoverContent
           side="bottom"
           :align="'end'"
-          class="rounded-xl p-2 border border-gray-300 shadow-md bg-white"
+          class="rounded-xl mt-1 p-2 border border-gray-300 shadow-md bg-white"
         >
           <div>
             <button class="">test</button>
@@ -40,7 +40,7 @@ import { cardColors } from '../../constants/cards'
         <PopoverContent
           side="bottom"
           :align="'end'"
-          class="rounded-xl p-2 border border-gray-300 shadow-md bg-white"
+          class="rounded-xl mt-1 p-2 border border-gray-300 shadow-md bg-white"
         >
           <div class="text-center w-[200px]">
             <span class="w-full text-gray-600 font-semibold text-sm block mb-3">Card color</span>
@@ -75,7 +75,7 @@ import { cardColors } from '../../constants/cards'
         <PopoverContent
           side="bottom"
           :align="'end'"
-          class="rounded-xl p-2 border border-gray-300 shadow-md bg-white"
+          class="rounded-xl mt-1 p-2 border border-gray-300 shadow-md bg-white"
         >
           <div class="text-center w-[200px]">
             <span class="w-full text-gray-600 font-semibold text-sm block mb-3">Move card</span>
@@ -97,7 +97,7 @@ import { cardColors } from '../../constants/cards'
         <PopoverContent
           side="bottom"
           :align="'end'"
-          class="rounded-xl p-2 border border-gray-300 shadow-md bg-white"
+          class="rounded-xl mt-1 p-2 border border-gray-300 shadow-md bg-white"
         >
           <div class="text-center w-[200px]">
             <span class="w-full text-gray-600 font-semibold text-sm block mb-3">Copy card</span>
@@ -119,7 +119,7 @@ import { cardColors } from '../../constants/cards'
         <PopoverContent
           side="bottom"
           :align="'end'"
-          class="rounded-xl p-2 border border-gray-300 shadow-md bg-white"
+          class="rounded-xl mt-1 p-2 border border-gray-300 shadow-md bg-white"
         >
           <div class="text-center w-[200px]">
             <span class="w-full text-gray-600 font-semibold text-sm block mb-3"

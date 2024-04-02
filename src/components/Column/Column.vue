@@ -83,6 +83,7 @@ const toggleNewCard = async () => {
       <Card
         v-for="card of props.cards"
         :key="card.id"
+        :id="card.id"
         :title="card.title"
         :color="card.color"
         :tags="card.tags"
