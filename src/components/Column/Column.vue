@@ -2,14 +2,14 @@
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'radix-vue'
 import Card from '../Card/Card.vue'
 import AddCard from './AddCard.vue'
-import { nextTick, ref } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import Button from '../Button.vue'
 import { useColumnsStore } from '@/stores/columns'
+import { useCardsStore } from '@/stores/cards'
 
 const props = defineProps({
   id: Number,
-  name: String,
-  cards: Array
+  name: String
 })
 
 const isEdition = ref(false)
@@ -18,6 +18,8 @@ const columnInput = ref(null)
 const cardsContainer = ref(null)
 const columnName = ref(props.name)
 const { deleteColumn, editColumn } = useColumnsStore()
+const cardsStore = useCardsStore()
+const cards = computed(() => cardsStore.cards.filter((card) => card.columnId === props.id))
 
 const toggleEdition = () => {
   isEdition.value = !isEdition.value
@@ -88,18 +90,23 @@ const editCol = () => {
     </div>
     <div
       ref="cardsContainer"
-      v-if="props.cards.length || showNewCard"
+      v-if="cards.length || showNewCard"
       class="cards flex overflow-y-auto p-1 flex-col gap-2 mt-2"
     >
       <Card
-        v-for="card of props.cards"
+        v-for="card of cards"
         :key="card.id"
         :id="card.id"
         :title="card.title"
         :color="card.color"
         :tags="card.tags"
       />
-      <AddCard v-if="showNewCard" @close="toggleNewCard" />
+      <AddCard
+        v-if="showNewCard"
+        @close="toggleNewCard"
+        :cardsAmount="cards.length"
+        :columnId="props.id"
+      />
     </div>
     <div v-if="!showNewCard" class="shrink-0 mt-1 p-1">
       <Button

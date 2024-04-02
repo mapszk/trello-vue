@@ -3,10 +3,22 @@ import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'radi
 import Button from '../Button.vue'
 import CustomSelect from '../CustomSelect.vue'
 import { cardColors } from '../../constants/cards'
+import { useCardsStore } from '@/stores/cards'
+
+const props = defineProps({
+  cardId: Number
+})
+
+const { editCard } = useCardsStore()
+
+const editCardColor = (color) => {
+  console.log(props.cardId, color)
+  editCard(props.cardId, { color })
+}
 </script>
 
 <template>
-  <aside class="flex-1 p-6 flex flex-col gap-2">
+  <aside class="flex flex-col gap-2">
     <span class="text-xs font-semibold text-gray-600">Settings</span>
 
     <PopoverRoot v-if="false">
@@ -47,11 +59,13 @@ import { cardColors } from '../../constants/cards'
             <div class="w-full flex gap-1">
               <button
                 class="flex-1 w-8 h-8 rounded-md flex items-center justify-center bg-gray-300"
+                @click="() => editCardColor(null)"
               >
                 <Icon icon="radix-icons:value-none" />
               </button>
               <button
                 v-for="color of cardColors"
+                @click="() => editCardColor(color)"
                 :key="color"
                 :style="{ backgroundColor: color }"
                 class="flex-1 w-8 h-8 rounded-md"

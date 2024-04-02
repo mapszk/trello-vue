@@ -2,10 +2,24 @@
 import Tag from '../Tag.vue'
 import CardSidebar from './CardSidebar.vue'
 import Modal from '../Modal.vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { useCardsStore } from '@/stores/cards'
+import { useColumnsStore } from '@/stores/columns'
+import { computed } from 'vue'
 
-const router = useRouter()
 const emit = defineEmits(['close'])
+const router = useRouter()
+const route = useRoute()
+const cardsStore = useCardsStore()
+const columnsStore = useColumnsStore()
+
+const cardInfo = computed(() =>
+  cardsStore.cards.find((card) => card.id === Number(route.params.id))
+)
+const columnName = computed(
+  () => columnsStore.columns.find((col) => col.id === cardInfo.value.columnId).name
+)
+
 const closeModal = () => {
   emit('close')
   router.go(-1)
@@ -20,7 +34,11 @@ const tags = [
 <template>
   <Modal @close="closeModal">
     <div class="max-w-[800px] min-h-[550px] mt-4 mb-4 md:mt-12 md:mb-12 rounded-xl bg-white">
-      <header class="bg-green-400 w-full h-24 md:h-32 rounded-t-xl flex p-2 md:p-4">
+      <header
+        v-if="cardInfo.color"
+        class="w-full h-24 md:h-32 rounded-t-xl flex p-2 md:p-4"
+        :style="{ backgroundColor: cardInfo.color }"
+      >
         <button
           @click="closeModal"
           class="mb-auto ml-auto rounded-md hover:bg-[rgba(0,0,0,0.15)] p-1"
@@ -34,9 +52,9 @@ const tags = [
             <Icon class="mr-4 mt-1" icon="radix-icons:card-stack" width="22px" />
             <div class="w-full">
               <h4 class="text-xl font-semibold mb-1">
-                [FRONT] No se ven accionables de registro de uso con escuelas WL
+                {{ cardInfo.title }}
               </h4>
-              <span class="text-sm text-gray-500">en la lista: Columna</span>
+              <span class="text-sm text-gray-500">en la lista: {{ columnName }}</span>
               <div class="flex mt-4 gap-1">
                 <div class="w-8 h-8 mr-2 rounded-full bg-slate-500"></div>
                 <Tag v-for="tag of tags" big :tag="tag.tag" :key="tag.id" :color="tag.color" />
@@ -54,7 +72,12 @@ const tags = [
             </div>
           </div>
         </section>
-        <CardSidebar />
+        <div class="flex-1 p-6 flex flex-col">
+          <button @click="closeModal" class="ml-auto rounded-md hover:bg-[rgba(0,0,0,0.15)] p-1">
+            <Icon icon="radix-icons:cross-2" class="text-gray-800" width="22px" />
+          </button>
+          <CardSidebar :cardId="cardInfo.id" />
+        </div>
       </div>
     </div>
   </Modal>

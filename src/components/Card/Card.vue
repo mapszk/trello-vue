@@ -19,7 +19,7 @@ const showCardModal = () => router.push({ name: 'card', params: { id: props.id }
     @click="showCardModal"
     class="bg-white shadow-sm cursor-pointer text-left rounded-xl hover:outline outline-2 outline-blue-500"
   >
-    <header v-if="color" class="h-10 rounded-t-xl bg-green-400"></header>
+    <header v-if="color" class="h-10 rounded-t-xl" :style="{ backgroundColor: color }"></header>
     <div
       :class="[color ? 'rounded-b-xl' : 'rounded-xl', 'p-2 border border-gray-300 border-t-none']"
     >
