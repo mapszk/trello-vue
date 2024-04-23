@@ -16,7 +16,7 @@
     "radix-vue": "^1.6.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
-    "vuedraggable": "^4.1.0"
+    "vue3-smooth-dnd": "^0.0.6"
   },
   "devDependencies": {
     "@iconify/vue": "^4.1.1",

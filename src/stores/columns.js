@@ -35,6 +35,18 @@ export const useColumnsStore = defineStore('columns', () => {
       col.id === id ? { ...newColumn, id, cards: col.cards } : col
     )
   }
+  const moveColumn = (removedIndex, addedIndex) => {
+    if (removedIndex === null && addedIndex === null) return
+    const result = [...columns.value]
+    let itemToAdd
+    if (removedIndex !== null) {
+      itemToAdd = result.splice(removedIndex, 1)[0]
+    }
+    if (addedIndex !== null) {
+      result.splice(addedIndex, 0, itemToAdd)
+    }
+    columns.value = result
+  }
 
-  return { columns, addNewColumn, deleteColumn, editColumn }
+  return { columns, addNewColumn, deleteColumn, editColumn, moveColumn }
 })
