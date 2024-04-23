@@ -11,8 +11,7 @@ export const useCardsStore = defineStore('cards', () => {
       title: newCard.title,
       columnId: newCard.columnId,
       description: newCard.description || null,
-      color: newCard.color || null,
-      order: newCard.order
+      color: newCard.color || null
     })
     return id
   }

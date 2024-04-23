@@ -19,8 +19,7 @@ const submit = () => {
   if (!newCardName.value) return
   addNewCard({
     title: newCardName.value,
-    columnId: props.columnId,
-    order: props.cardsAmount + 1
+    columnId: props.columnId
   })
   close()
 }

@@ -34,13 +34,7 @@ const submitCopy = () => {
     const id = addNewCard({
       title: props.card.title,
       columnId: newColumn.value,
-      color: props.card.color,
-      order:
-        Math.max(
-          ...cardsStore.cards
-            .filter((card) => card.columnId === props.card.columnId)
-            .map((card) => card.order)
-        ) + 1
+      color: props.card.color
     })
     toggleOpen()
     emit('copy', id)

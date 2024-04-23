@@ -5,19 +5,16 @@ export const useColumnsStore = defineStore('columns', () => {
   const columns = ref([
     {
       id: 1,
-      order: 0,
       name: 'Stage',
       cards: []
     },
     {
       id: 2,
-      order: 1,
       name: 'Production',
       cards: []
     },
     {
       id: 3,
-      order: 2,
       name: 'Deployed',
       cards: []
     }
@@ -26,7 +23,6 @@ export const useColumnsStore = defineStore('columns', () => {
   const addNewColumn = (newColumn) => {
     columns.value.push({
       id: Date.now(),
-      order: columns.value.length + 1,
       cards: [],
       ...newColumn
     })
