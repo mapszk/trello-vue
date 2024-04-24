@@ -30,26 +30,24 @@ const onDrop = ({ removedIndex, addedIndex }) => {
 </script>
 
 <template>
-  <main>
+  <main class="h-[calc(100vh-3rem)] bg-blue-500">
     <CardModal v-if="showCardModal" />
-    <section class="bg-gray-50 h-full w-screen overflow-x-auto">
-      <Container
-        orientation="horizontal"
-        @drop="onDrop"
-        :style="{ display: 'flex' }"
-        class="h-full overflow-x-auto flex items-start gap-3 p-4"
-      >
-        <Draggable v-for="col of columns" :key="col.id">
-          <Column :id="col.id" :name="col.name" :cards="col.cards" />
-        </Draggable>
-        <NewColumn />
-      </Container>
-    </section>
+    <Container
+      orientation="horizontal"
+      @drop="onDrop"
+      :style="{ display: 'flex' }"
+      class="bg-orange-500 h-full overflow-auto items-start gap-3 p-4"
+    >
+      <Draggable class="bg-purple-200" v-for="col of columns" :key="col.id">
+        <Column :id="col.id" :name="col.name" :cards="col.cards" />
+      </Draggable>
+      <NewColumn />
+    </Container>
   </main>
 </template>
 
 <style scoped>
-main {
-  height: calc(100vh - 3rem);
+.smooth-dnd-container {
+  display: flex;
 }
 </style>

@@ -2,7 +2,64 @@ import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useCardsStore = defineStore('cards', () => {
-  const cards = ref([])
+  const cards = ref([
+    {
+      id: 1,
+      title: 'test',
+      columnId: 2,
+      description: '',
+      color: '#3239ff'
+    },
+    {
+      id: 2,
+      title: 'test',
+      columnId: 2,
+      description: '',
+      color: '#3239ff'
+    },
+    {
+      id: 3,
+      title: 'test',
+      columnId: 2,
+      description: '',
+      color: '#3239ff'
+    },
+    {
+      id: 4,
+      title: 'test',
+      columnId: 2,
+      description: '',
+      color: '#3239ff'
+    },
+    {
+      id: 5,
+      title: 'test',
+      columnId: 2,
+      description: '',
+      color: '#3239ff'
+    },
+    {
+      id: 6,
+      title: 'test',
+      columnId: 2,
+      description: '',
+      color: '#3239ff'
+    },
+    {
+      id: 8,
+      title: 'test',
+      columnId: 2,
+      description: '',
+      color: '#3239ff'
+    },
+    {
+      id: 64,
+      title: 'test',
+      columnId: 2,
+      description: '',
+      color: '#3239ff'
+    }
+  ])
 
   const addNewCard = (newCard) => {
     const id = Date.now()
