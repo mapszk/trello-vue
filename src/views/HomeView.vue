@@ -1,5 +1,5 @@
 <script setup>
-import { Container, Draggable } from 'vue3-smooth-dnd'
+import { Container } from 'vue3-smooth-dnd'
 import CardModal from '@/components/Card/Modal/CardModal.vue'
 import Column from '../components/Column/Column.vue'
 import NewColumn from '../components/Column/NewColumn.vue'
@@ -34,20 +34,21 @@ const onDrop = ({ removedIndex, addedIndex }) => {
     <CardModal v-if="showCardModal" />
     <Container
       orientation="horizontal"
+      drag-handle-selector=".column-dnd"
       @drop="onDrop"
       :style="{ display: 'flex' }"
-      class="bg-orange-500 h-full overflow-auto items-start gap-3 p-4"
+      class="bg-gray-50 h-full w-screen overflow-x-auto flex items-start gap-3 p-4"
     >
-      <Draggable class="bg-purple-200" v-for="col of columns" :key="col.id">
-        <Column :id="col.id" :name="col.name" :cards="col.cards" />
-      </Draggable>
+      <Column
+        v-for="col in columns"
+        :key="col.id"
+        :id="col.id"
+        :name="col.name"
+        :cards="col.cards"
+      />
       <NewColumn />
     </Container>
   </main>
 </template>
 
-<style scoped>
-.smooth-dnd-container {
-  display: flex;
-}
-</style>
+<style scoped></style>

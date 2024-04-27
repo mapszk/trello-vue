@@ -1,4 +1,5 @@
 <script setup>
+import { Draggable } from 'vue3-smooth-dnd'
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'radix-vue'
 import Card from '../Card/Card.vue'
 import AddCard from './AddCard.vue'
@@ -42,10 +43,18 @@ const editCol = () => {
 </script>
 
 <template>
-  <div
-    class="w-72 max-h-full shrink-0 self-start border border-gray-300 flex flex-col p-2 rounded-xl shadow-sm bg-gray-200"
+  <Draggable
+    :style="{ display: 'flex', height: 'auto' }"
+    :tag="{
+      value: 'div',
+      props: {
+        class:
+          'w-72 max-h-full shrink-0 self-start border border-gray-300 flex flex-col p-2 rounded-xl shadow-sm bg-gray-200'
+      }
+    }"
+    class=""
   >
-    <div class="flex items-center h-8 shrink-0 gap-2 justify-between">
+    <div class="column-dnd flex items-center h-8 shrink-0 gap-2 justify-between">
       <span
         v-show="!isEdition"
         @click="toggleEdition"
@@ -117,5 +126,5 @@ const editCol = () => {
         Add a new card
       </Button>
     </div>
-  </div>
+  </Draggable>
 </template>
