@@ -4,57 +4,22 @@ import { defineStore } from 'pinia'
 export const useCardsStore = defineStore('cards', () => {
   const cards = ref([
     {
-      id: 1,
-      title: 'test',
-      columnId: 2,
-      description: '',
-      color: '#3239ff'
-    },
-    {
-      id: 2,
-      title: 'test',
-      columnId: 2,
-      description: '',
-      color: '#3239ff'
-    },
-    {
-      id: 3,
-      title: 'test',
-      columnId: 2,
-      description: '',
-      color: '#3239ff'
-    },
-    {
       id: 4,
-      title: 'test',
+      title: 'primera',
       columnId: 2,
       description: '',
-      color: '#3239ff'
+      color: '#ab2498'
     },
     {
       id: 5,
-      title: 'test',
+      title: 'segunda',
       columnId: 2,
       description: '',
-      color: '#3239ff'
+      color: '#6822fa'
     },
     {
       id: 6,
-      title: 'test',
-      columnId: 2,
-      description: '',
-      color: '#3239ff'
-    },
-    {
-      id: 8,
-      title: 'test',
-      columnId: 2,
-      description: '',
-      color: '#3239ff'
-    },
-    {
-      id: 64,
-      title: 'test',
+      title: 'tercera',
       columnId: 2,
       description: '',
       color: '#3239ff'
@@ -78,6 +43,18 @@ export const useCardsStore = defineStore('cards', () => {
   const editCard = (id, newCard) => {
     cards.value = cards.value.map((card) => (card.id === id ? { ...card, ...newCard, id } : card))
   }
+  const moveCard = (removedIndex, addedIndex) => {
+    if (removedIndex === null && addedIndex === null) return
+    const result = [...cards.value]
+    let itemToAdd
+    if (removedIndex !== null) {
+      itemToAdd = result.splice(removedIndex, 1)[0]
+    }
+    if (addedIndex !== null) {
+      result.splice(addedIndex, 0, itemToAdd)
+    }
+    cards.value = result
+  }
 
-  return { cards, addNewCard, deleteCard, editCard }
+  return { cards, addNewCard, deleteCard, editCard, moveCard }
 })

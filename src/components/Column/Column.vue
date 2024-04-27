@@ -1,5 +1,5 @@
 <script setup>
-import { Draggable } from 'vue3-smooth-dnd'
+import { Container, Draggable } from 'vue3-smooth-dnd'
 import { PopoverContent, PopoverPortal, PopoverRoot, PopoverTrigger } from 'radix-vue'
 import Card from '../Card/Card.vue'
 import AddCard from './AddCard.vue'
@@ -40,6 +40,14 @@ const editCol = () => {
   columnName.value && editColumn(props.id, { name: columnName.value })
   isEdition.value = false
 }
+
+const getCardPayload = () => {
+  return (index) => cards.value[index]
+}
+
+const onDropCard = (evt) => {
+  cardsStore.moveCard(evt.removedIndex, evt.addedIndex)
+}
 </script>
 
 <template>
@@ -54,11 +62,11 @@ const editCol = () => {
     }"
     class=""
   >
-    <div class="column-dnd flex items-center h-8 shrink-0 gap-2 justify-between">
+    <div class="column-dnd cursor-grab flex items-center h-8 shrink-0 gap-2 justify-between">
       <span
         v-show="!isEdition"
         @click="toggleEdition"
-        class="text-sm text-gray-600 font-semibold px-2"
+        class="cursor-text text-sm text-gray-600 font-semibold px-2"
       >
         {{ props.name }}
       </span>
@@ -97,25 +105,28 @@ const editCol = () => {
         </PopoverPortal>
       </PopoverRoot>
     </div>
-    <div
-      ref="cardsContainer"
-      v-if="cards.length || showNewCard"
-      class="cards flex overflow-y-auto p-1 flex-col gap-2 mt-2"
-    >
-      <Card
-        v-for="card of cards"
-        :key="card.id"
-        :id="card.id"
-        :title="card.title"
-        :color="card.color"
-        :tags="card.tags"
-      />
-      <AddCard
-        v-if="showNewCard"
-        @close="toggleNewCard"
-        :cardsAmount="cards.length"
-        :columnId="props.id"
-      />
+    <div ref="cardsContainer" class="overflow-y-auto">
+      <Container
+        class="flex overflow-y-auto flex-col gap-2 p-1"
+        group-name="col"
+        @drop="onDropCard"
+        :get-child-payload="getCardPayload()"
+      >
+        <Card
+          v-for="card of cards"
+          :key="card.id"
+          :id="card.id"
+          :title="card.title"
+          :color="card.color"
+          :tags="card.tags"
+        />
+        <AddCard
+          v-if="showNewCard"
+          @close="toggleNewCard"
+          :cardsAmount="cards.length"
+          :columnId="props.id"
+        />
+      </Container>
     </div>
     <div v-if="!showNewCard" class="shrink-0 mt-1 p-1">
       <Button
