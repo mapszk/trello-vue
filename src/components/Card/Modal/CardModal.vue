@@ -33,8 +33,6 @@ const copied = (id) => {
   closeModal()
   router.push({ name: 'card', params: { id } })
 }
-
-const tags = []
 </script>
 
 <template>
@@ -61,7 +59,6 @@ const tags = []
               <span class="text-sm text-gray-500">en la lista: {{ columnName }}</span>
               <div class="flex mt-4 gap-1">
                 <Avatar class="w-9 h-9 mr-auto text-gray-400" />
-                <Tag v-for="tag of tags" big :tag="tag.tag" :key="tag.id" :color="tag.color" />
               </div>
             </div>
           </div>
