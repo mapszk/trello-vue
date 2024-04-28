@@ -43,17 +43,22 @@ export const useCardsStore = defineStore('cards', () => {
   const editCard = (id, newCard) => {
     cards.value = cards.value.map((card) => (card.id === id ? { ...card, ...newCard, id } : card))
   }
-  const moveCard = (removedIndex, addedIndex) => {
-    if (removedIndex === null && addedIndex === null) return
-    const result = [...cards.value]
-    let itemToAdd
-    if (removedIndex !== null) {
-      itemToAdd = result.splice(removedIndex, 1)[0]
+  const moveCard = (removedIndex, addedIndex, cardId, columnId) => {
+    if (cardId && columnId) {
+      console.log('cambiar col')
+      cards.value = cards.value.map((card) => (card.id === cardId ? { ...card, columnId } : card))
+    } else {
+      console.log('cambiar pos')
+      const result = [...cards.value]
+      let itemToAdd
+      if (removedIndex !== null) {
+        itemToAdd = result.splice(removedIndex, 1)[0]
+      }
+      if (addedIndex !== null) {
+        result.splice(addedIndex, 0, itemToAdd)
+      }
+      cards.value = result
     }
-    if (addedIndex !== null) {
-      result.splice(addedIndex, 0, itemToAdd)
-    }
-    cards.value = result
   }
 
   return { cards, addNewCard, deleteCard, editCard, moveCard }

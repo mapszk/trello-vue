@@ -22,6 +22,14 @@ const { deleteColumn, editColumn } = useColumnsStore()
 const cardsStore = useCardsStore()
 const cards = computed(() => cardsStore.cards.filter((card) => card.columnId === props.id))
 
+const tag = {
+  value: 'div',
+  props: {
+    class:
+      'w-72 max-h-full shrink-0 self-start border border-gray-300 flex flex-col p-2 rounded-xl shadow-sm bg-gray-200'
+  }
+}
+
 const toggleEdition = () => {
   isEdition.value = !isEdition.value
   if (isEdition.value) nextTick(() => columnInput.value.focus())
@@ -46,22 +54,18 @@ const getCardPayload = () => {
 }
 
 const onDropCard = (evt) => {
-  cardsStore.moveCard(evt.removedIndex, evt.addedIndex)
+  if (evt.removedIndex === null && evt.addedIndex === null) return
+
+  // if (Number.isInteger(evt.removedIndex) && Number.isInteger(evt.addedIndex))
+  //   cardsStore.moveCard(evt.removedIndex, evt.addedIndex)
+
+  if (!Number.isInteger(evt.removedIndex) && Number.isInteger(evt.addedIndex))
+    cardsStore.moveCard(evt.removedIndex, evt.addedIndex, evt.payload.id, props.id)
 }
 </script>
 
 <template>
-  <Draggable
-    :style="{ display: 'flex', height: 'auto' }"
-    :tag="{
-      value: 'div',
-      props: {
-        class:
-          'w-72 max-h-full shrink-0 self-start border border-gray-300 flex flex-col p-2 rounded-xl shadow-sm bg-gray-200'
-      }
-    }"
-    class=""
-  >
+  <Draggable :style="{ display: 'flex', height: 'auto' }" :tag="tag" class="">
     <div class="column-dnd cursor-grab flex items-center h-8 shrink-0 gap-2 justify-between">
       <span
         v-show="!isEdition"
