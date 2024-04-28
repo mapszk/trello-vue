@@ -20,7 +20,9 @@ const cardsContainer = ref(null)
 const columnName = ref(props.name)
 const { deleteColumn, editColumn } = useColumnsStore()
 const cardsStore = useCardsStore()
-const cards = computed(() => cardsStore.cards.filter((card) => card.columnId === props.id))
+const cards = computed(() =>
+  cardsStore.cards.filter((card) => card.columnId === props.id).sort((a, b) => a.order - b.order)
+)
 
 const tag = {
   value: 'div',
@@ -56,11 +58,19 @@ const getCardPayload = () => {
 const onDropCard = (evt) => {
   if (evt.removedIndex === null && evt.addedIndex === null) return
 
-  // if (Number.isInteger(evt.removedIndex) && Number.isInteger(evt.addedIndex))
-  //   cardsStore.moveCard(evt.removedIndex, evt.addedIndex)
+  if (Number.isInteger(evt.removedIndex) && Number.isInteger(evt.addedIndex)) {
+    cardsStore.changeCardOrder(evt.payload, cards.value[evt.addedIndex])
+  }
 
-  if (!Number.isInteger(evt.removedIndex) && Number.isInteger(evt.addedIndex))
-    cardsStore.moveCard(evt.removedIndex, evt.addedIndex, evt.payload.id, props.id)
+  if (!Number.isInteger(evt.removedIndex) && Number.isInteger(evt.addedIndex)) {
+    cardsStore.changeCardColumn({
+      cardId: evt.payload.id,
+      newColumnId: props.id,
+      oldColumnId: evt.payload.columnId,
+      newOrder: evt.addedIndex + 1,
+      oldOrder: evt.payload.order
+    })
+  }
 }
 </script>
 
@@ -120,6 +130,7 @@ const onDropCard = (evt) => {
           v-for="card of cards"
           :key="card.id"
           :id="card.id"
+          :order="card.order"
           :title="card.title"
           :color="card.color"
           :tags="card.tags"

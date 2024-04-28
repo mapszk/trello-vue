@@ -5,7 +5,7 @@ import Avatar from '@/components/Avatar.vue'
 
 const props = defineProps({
   id: Number,
-  i: Number,
+  order: Number,
   title: String,
   color: String,
   tags: Array,
