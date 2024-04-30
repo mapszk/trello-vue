@@ -1,33 +1,45 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useCardsStore = defineStore('cards', () => {
-  const cards = ref([
-    // {
-    //   id: 1,
-    //   title: 'primera',
-    //   columnId: 2,
-    //   description: '',
-    //   order: 1,
-    //   color: '#ab2498'
-    // },
-    // {
-    //   id: 2,
-    //   title: 'segunda',
-    //   columnId: 2,
-    //   description: '',
-    //   order: 2,
-    //   color: '#6822fa'
-    // },
-    // {
-    //   id: 3,
-    //   title: 'tercera',
-    //   columnId: 2,
-    //   description: '',
-    //   order: 3,
-    //   color: '#3239ff'
-    // }
-  ])
+  const defaultValue = [
+    {
+      id: 1,
+      title: 'Create a navbar',
+      columnId: 1,
+      description: '',
+      order: 1,
+      color: '#22c55e'
+    },
+    {
+      id: 2,
+      title: 'Checkout Martin portfolio',
+      columnId: 2,
+      description: 'https://pzk.com.ar',
+      order: 1,
+      color: '#f97316'
+    },
+    {
+      id: 3,
+      title: 'Card modal',
+      columnId: 4,
+      description: 'Create a modal for the cards',
+      order: 1,
+      color: '#d946ef'
+    },
+    {
+      id: 4,
+      title: 'Integrate drag and drop',
+      columnId: 4,
+      description: 'Integrate drag and drop for cards and columns',
+      order: 2,
+      color: '#d946ef'
+    }
+  ]
+
+  const cards = ref(JSON.parse(localStorage.getItem('cards')) || defaultValue)
+
+  watch(cards.value, () => localStorage.setItem('cards', JSON.stringify(cards.value)))
 
   const addNewCard = (newCard) => {
     const id = Date.now()

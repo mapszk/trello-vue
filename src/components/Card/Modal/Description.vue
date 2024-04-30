@@ -9,7 +9,7 @@ const props = defineProps({
 
 const { editCard } = useCardsStore()
 const edition = ref(false)
-const newDescription = ref(props.title)
+const newDescription = ref(props.description)
 const newDescriptionInput = ref(null)
 
 const toggleEdition = () => {

@@ -1,24 +1,33 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useColumnsStore = defineStore('columns', () => {
-  const columns = ref([
+  const defaultValue = [
     {
       id: 1,
-      name: 'Stage',
+      name: 'Backlog',
       cards: []
     },
     {
       id: 2,
-      name: 'Production',
+      name: 'In progress',
       cards: []
     },
     {
       id: 3,
-      name: 'Deployed',
+      name: 'Code review',
+      cards: []
+    },
+    {
+      id: 4,
+      name: 'In production',
       cards: []
     }
-  ])
+  ]
+
+  const columns = ref(JSON.parse(localStorage.getItem('columns')) || defaultValue)
+
+  watch(columns.value, () => localStorage.setItem('columns', JSON.stringify(columns.value)))
 
   const addNewColumn = (newColumn) => {
     columns.value.push({
