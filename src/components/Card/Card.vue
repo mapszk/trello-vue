@@ -33,3 +33,5 @@ const props = defineProps({
     </RouterLink>
   </Draggable>
 </template>
+
+<style scoped></style>

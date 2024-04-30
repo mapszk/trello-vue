@@ -56,7 +56,7 @@ const mouseMove = (evt) => {
 </script>
 
 <template>
-  <main class="h-[calc(100vh-3rem)] bg-blue-500">
+  <main class="h-screen bg-blue-500">
     <CardModal v-if="showCardModal" />
     <Container
       ref="container"
@@ -68,7 +68,7 @@ const mouseMove = (evt) => {
       drag-handle-selector=".column-dnd"
       @drop="onDrop"
       :style="{ display: 'flex' }"
-      class="bg-gray-50 h-full w-screen overflow-x-auto flex items-start gap-3 p-4"
+      class="h-full w-screen overflow-x-auto flex items-start gap-3 p-4"
     >
       <Column
         v-for="col in columns"
