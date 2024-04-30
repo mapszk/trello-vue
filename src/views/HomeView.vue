@@ -34,10 +34,12 @@ const onDrop = ({ removedIndex, addedIndex }) => {
 }
 
 const mouseDown = (evt) => {
-  isDown.value = true
-  startX.value = evt.pageX - container.value.$el.offsetLeft
-  scrollLeft.value = container.value.$el.scrollLeft
-  scrollTop.value = container.value.$el.scrollTop
+  if (evt.srcElement.id === 'board') {
+    isDown.value = true
+    startX.value = evt.pageX - container.value.$el.offsetLeft
+    scrollLeft.value = container.value.$el.scrollLeft
+    scrollTop.value = container.value.$el.scrollTop
+  }
 }
 const mouseUp = () => {
   isDown.value = false
@@ -59,6 +61,7 @@ const mouseMove = (evt) => {
   <main class="h-screen bg-blue-500">
     <CardModal v-if="showCardModal" />
     <Container
+      id="board"
       ref="container"
       @mousedown="mouseDown"
       @mouseup="mouseUp"
@@ -68,7 +71,7 @@ const mouseMove = (evt) => {
       drag-handle-selector=".column-dnd"
       @drop="onDrop"
       :style="{ display: 'flex' }"
-      class="h-full w-screen overflow-x-auto flex items-start gap-3 p-4"
+      class="h-full w-screen overflow-x-auto flex items-start gap-3 p-6"
     >
       <Column
         v-for="col in columns"

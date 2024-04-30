@@ -27,7 +27,11 @@ export const useColumnsStore = defineStore('columns', () => {
 
   const columns = ref(JSON.parse(localStorage.getItem('columns')) || defaultValue)
 
-  watch(columns.value, () => localStorage.setItem('columns', JSON.stringify(columns.value)))
+  watch(
+    () => columns.value,
+    () => localStorage.setItem('columns', JSON.stringify(columns.value)),
+    { deep: true }
+  )
 
   const addNewColumn = (newColumn) => {
     columns.value.push({

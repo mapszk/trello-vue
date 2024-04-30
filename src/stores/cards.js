@@ -13,6 +13,14 @@ export const useCardsStore = defineStore('cards', () => {
     },
     {
       id: 2,
+      title: 'Integrate links in card description',
+      columnId: 1,
+      description: '',
+      order: 2,
+      color: '#22c55e'
+    },
+    {
+      id: 3,
       title: 'Checkout Martin portfolio',
       columnId: 2,
       description: 'https://pzk.com.ar',
@@ -20,7 +28,7 @@ export const useCardsStore = defineStore('cards', () => {
       color: '#f97316'
     },
     {
-      id: 3,
+      id: 4,
       title: 'Card modal',
       columnId: 4,
       description: 'Create a modal for the cards',
@@ -28,10 +36,18 @@ export const useCardsStore = defineStore('cards', () => {
       color: '#d946ef'
     },
     {
-      id: 4,
+      id: 5,
       title: 'Integrate drag and drop',
       columnId: 4,
       description: 'Integrate drag and drop for cards and columns',
+      order: 2,
+      color: '#d946ef'
+    },
+    {
+      id: 6,
+      title: 'Create columns',
+      columnId: 4,
+      description: 'Create board columns',
       order: 2,
       color: '#d946ef'
     }
@@ -39,7 +55,11 @@ export const useCardsStore = defineStore('cards', () => {
 
   const cards = ref(JSON.parse(localStorage.getItem('cards')) || defaultValue)
 
-  watch(cards.value, () => localStorage.setItem('cards', JSON.stringify(cards.value)))
+  watch(
+    () => cards.value,
+    () => localStorage.setItem('cards', JSON.stringify(cards.value)),
+    { deep: true }
+  )
 
   const addNewCard = (newCard) => {
     const id = Date.now()
